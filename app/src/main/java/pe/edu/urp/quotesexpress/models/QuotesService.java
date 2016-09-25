@@ -11,6 +11,7 @@ import pe.edu.urp.quotesexpress.R;
 public class QuotesService {
     private List<Quote> quotes;
 
+    //Quote no lo inicializo
     public List<Quote> getQuotes() {
         if(quotes == null){
             quotes = new ArrayList<>();
@@ -50,5 +51,17 @@ public class QuotesService {
                 "K Ramos",
                 Integer.toString(R.mipmap.ic_default)));
 
+    }
+
+    public Quote findQuoteByPhrase(String phrase){
+        for (Quote quote : getQuotes()){
+            if (quote.getPhrase().equalsIgnoreCase(phrase)) return quote;
+        }
+        return null;
+    }
+    public boolean addQuote(String phrase, String author, String pictureUri){
+        if ((phrase.isEmpty() || (findQuoteByPhrase(phrase) != null))) return  false;
+        getQuotes().add(new Quote(phrase, author, pictureUri));
+        return true;
     }
 }

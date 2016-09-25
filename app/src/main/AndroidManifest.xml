@@ -3,6 +3,7 @@
     package="pe.edu.urp.quotesexpress">
 
     <application
+        android:name=".QuotesExpressApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,6 +18,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.AddQuoteActivity"
+            android:label="@string/title_activity_add_quote"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pe.edu.urp.quotesexpress.activities.MainActivity" />
         </activity>
     </application>
 

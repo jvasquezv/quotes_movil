@@ -1,5 +1,6 @@
 package pe.edu.urp.quotesexpress.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,13 +12,14 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import pe.edu.urp.quotesexpress.QuotesExpressApp;
 import pe.edu.urp.quotesexpress.R;
 import pe.edu.urp.quotesexpress.adapters.QuotesAdapter;
 import pe.edu.urp.quotesexpress.models.QuotesService;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView quotesRecyclerView;
-    QuotesService service = new QuotesService();
+
 
 
     @Override
@@ -29,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
         quotesRecyclerView = (RecyclerView) findViewById(R.id.quotesRecyclerView);
         quotesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        quotesRecyclerView.setAdapter(new QuotesAdapter(service.getQuotes()));
+        quotesRecyclerView.setAdapter(new QuotesAdapter(getServices().getQuotes()));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+              startActivity(new Intent(view.getContext(),AddQuoteActivity.class));
+
             }
         });
     }
@@ -61,5 +63,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private QuotesService getServices(){
+        return ((QuotesExpressApp) getApplication()).getService();
+    }
+
+    @Override
+    protected void onResume() {
+        ((QuotesAdapter)quotesRecyclerView.getAdapter())
+                .setQuotes(getServices().getQuotes());
+
+        quotesRecyclerView.getAdapter()
+                .notifyDataSetChanged();
+
+        super.onResume();
     }
 }

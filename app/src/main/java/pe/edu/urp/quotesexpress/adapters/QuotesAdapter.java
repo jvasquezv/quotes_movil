@@ -17,10 +17,10 @@ import pe.edu.urp.quotesexpress.models.Quote;
  * Created by Administrador on 18/09/2016.
  */
 public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.ViewHolder> {
-    List<Quote> quotes;
+    private List<Quote> quotes;
 
     public QuotesAdapter(List<Quote> quotes) {
-        this.quotes = quotes;
+        this.setQuotes(quotes);
     }
 
 
@@ -34,14 +34,22 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(QuotesAdapter.ViewHolder holder, int position) {
-        holder.phraseTextView.setText(quotes.get(position).getPhrase());
-        holder.authorTextView.setText(quotes.get(position).getAuthor());
-        holder.pictureImageView.setImageResource(Integer.parseInt(quotes.get(position).getPictureUri()));
+        holder.phraseTextView.setText(getQuotes().get(position).getPhrase());
+        holder.authorTextView.setText(getQuotes().get(position).getAuthor());
+        holder.pictureImageView.setImageResource(Integer.parseInt(getQuotes().get(position).getPictureUri()));
     }
 
     @Override
     public int getItemCount() {
-        return quotes.size();
+        return getQuotes().size();
+    }
+
+    public List<Quote> getQuotes() {
+        return quotes;
+    }
+
+    public void setQuotes(List<Quote> quotes) {
+        this.quotes = quotes;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

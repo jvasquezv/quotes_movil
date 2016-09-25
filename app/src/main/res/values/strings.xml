@@ -3,4 +3,8 @@
     <string name="action_settings">Settings</string>
     <string name="card_quote_sample_phrase">No hay nadie que ame el dolor mismo, que lo busque, lo encuentre y lo quiera, simplemente porque es el dolor.</string>
     <string name="card_quote_sample_author">J vasquez</string>
+    <string name="title_activity_add_quote">Add Quote</string>
+    <string name="add_quote_phrase_hint">Phrase</string>
+    <string name="add_quote_Author_hint">Author</string>
+
 </resources>
