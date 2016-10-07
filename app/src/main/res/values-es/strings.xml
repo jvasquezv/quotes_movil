@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">QuotesExpress</string>
     <string name="action_settings">Ajustes</string>
-    <string name="add_quote_Author_hint">Autor</string>
+    <string name="add_quote_author_hint">Autor</string>
     <string name="add_quote_phrase_hint">Frase</string>
-    <string name="title_activity_add_quote">Agregar Frase</string>
 </resources>

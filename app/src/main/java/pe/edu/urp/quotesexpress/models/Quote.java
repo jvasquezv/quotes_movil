@@ -9,9 +9,9 @@ public class Quote {
     private String pictureUri;
 
     public Quote(String phrase, String author, String pictureUri) {
-        this.phrase = phrase;
-        this.author = author;
-        this.pictureUri = pictureUri;
+        this.setPhrase(phrase);
+        this.setAuthor(author);
+        this.setPictureUri(pictureUri);
     }
 
     public String getPhrase() {

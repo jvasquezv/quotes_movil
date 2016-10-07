@@ -15,11 +15,11 @@ import android.view.MenuItem;
 import pe.edu.urp.quotesexpress.QuotesExpressApp;
 import pe.edu.urp.quotesexpress.R;
 import pe.edu.urp.quotesexpress.adapters.QuotesAdapter;
-import pe.edu.urp.quotesexpress.models.QuotesService;
+import pe.edu.urp.quotesexpress.models.QuoteService;
 
 public class MainActivity extends AppCompatActivity {
-    RecyclerView quotesRecyclerView;
 
+    RecyclerView quotesRecyclerView;
 
 
     @Override
@@ -29,15 +29,17 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        quotesRecyclerView = (RecyclerView) findViewById(R.id.quotesRecyclerView);
+        quotesRecyclerView = (RecyclerView)findViewById(R.id.quotesRecyclerView);
         quotesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        quotesRecyclerView.setAdapter(new QuotesAdapter(getServices().getQuotes()));
+        quotesRecyclerView.setAdapter(new QuotesAdapter(getService().getQuotes()));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              startActivity(new Intent(view.getContext(),AddQuoteActivity.class));
+                startActivity(new Intent(view.getContext(),AddQuoteActivity.class));
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
 
             }
         });
@@ -65,19 +67,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    private QuotesService getServices(){
+    private QuoteService getService(){
         return ((QuotesExpressApp) getApplication()).getService();
     }
 
     @Override
-    protected void onResume() {
-        ((QuotesAdapter)quotesRecyclerView.getAdapter())
-                .setQuotes(getServices().getQuotes());
-
-        quotesRecyclerView.getAdapter()
-                .notifyDataSetChanged();
-
+    protected void onResume(){
+        ((QuotesAdapter)quotesRecyclerView.getAdapter()).setQuotes(getService().getQuotes());
+        ((QuotesAdapter)quotesRecyclerView.getAdapter()).notifyDataSetChanged();
         super.onResume();
     }
 }

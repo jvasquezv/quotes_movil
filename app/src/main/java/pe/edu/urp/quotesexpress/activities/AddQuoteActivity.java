@@ -10,11 +10,10 @@ import android.view.View;
 
 import pe.edu.urp.quotesexpress.QuotesExpressApp;
 import pe.edu.urp.quotesexpress.R;
-import pe.edu.urp.quotesexpress.models.QuotesService;
+import pe.edu.urp.quotesexpress.models.QuoteService;
 
 public class AddQuoteActivity extends AppCompatActivity {
-    TextInputEditText pharseTextInputEditText, authorTextInputEditText;
-
+    TextInputEditText phraseTextInputEditText, authorTextInputEditText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,9 +21,8 @@ public class AddQuoteActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        pharseTextInputEditText = (TextInputEditText) findViewById(R.id.phraseTextInputEditText);
-        authorTextInputEditText = (TextInputEditText) findViewById(R.id.AuthorTextInputEditText);
-
+        phraseTextInputEditText =(TextInputEditText) findViewById(R.id.phraseTextInputEditText);
+        authorTextInputEditText=(TextInputEditText) findViewById(R.id.authorTextInputEditText);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -32,33 +30,33 @@ public class AddQuoteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String message = getActionMessage();
                 Snackbar.make(view, message, Snackbar.LENGTH_LONG)
-                        .setAction("Clear", getOnClickListenerForClearAction()).show();
-                if(message =="Success") finish();
+                        .setAction("Clear",getOnClickListenerForClearAction() ).show();
+                if(message=="Success") finish();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private String getActionMessage(){
-        return ((getServices().addQuote(
-                pharseTextInputEditText.getText().toString(),
+        return ((getService().addQuote(
+                phraseTextInputEditText.getText().toString(),
                 authorTextInputEditText.getText().toString(),
-                Integer.toString(R.mipmap.ic_default))) ?
-                "Success" :
-                "The phrase already exists");
+                Integer.toString(R.mipmap.ic_default)))?"Success":"The phrase already exists");
     }
 
     private View.OnClickListener getOnClickListenerForClearAction(){
         return new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                pharseTextInputEditText.setText("");
+            public void onClick(View view){
                 authorTextInputEditText.setText("");
-                pharseTextInputEditText.requestFocus();
+                phraseTextInputEditText.setText("");
+                phraseTextInputEditText.requestFocus();
             }
         };
     }
-    private QuotesService getServices(){
+
+    private QuoteService getService(){
         return ((QuotesExpressApp) getApplication()).getService();
     }
+
 }
